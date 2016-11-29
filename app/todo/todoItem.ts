@@ -1,27 +1,24 @@
-let nextId = 0;
+let nextId = 1;
 
 export class TodoItem {
   private _id: number;
-  public _name: string;
-  public _isComplete: boolean;
+  public Name: string;
+  public IsComplete: boolean;
 
   constructor(name: string) {
       this._id = nextId++;
-      this._name = name;
+      this.Name = name;
     }
 
     getID() {
       return this._id;
     }
-    getName() {
-      return this._name;
-    }
 
     setName(name: string){
-      this._name = name;
+      this.Name = name;
     }
 
-    setCompleted(completed: boolean){
-      this._isComplete = completed;
-    }
+    // setCompleted(completed: boolean){
+    //   this.IsComplete = completed;
+    // }
 }
