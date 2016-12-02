@@ -12,10 +12,10 @@ export class TodoService {
     //private backend: BackendService,
     private logger: Logger) { }
 
-  addTodoItem(item: TodoItem){
+  addTodoItem(name: string){
       //TODO: Check if item is already in list
       //TODO: add to backend
-      this._list.push(item);
+      this._list.push(new TodoItem(name));
   }
 
   getTodoItems() {
