@@ -13,9 +13,49 @@ export class TodoService {
     private logger: Logger) { }
 
   addTodoItem(name: string){
-      //TODO: Check if item is already in list
-      //TODO: add to backend
+    let isInList = this.isItemInList(name);
+
+    this.logger.log(isInList);
+
+    if(!isInList){
       this._list.push(new TodoItem(name));
+    }
+  }
+
+  removeTodoItems(items: TodoItem[]){
+    let completedList = items;
+    let completedItemIndex = 0;
+    let newList = [];
+    let curID = 0;
+
+    this._list.forEach((item) => {
+      if(completedItemIndex > completedList.length - 1){
+        newList.push(item);
+      } else {
+        let curID = completedList[completedItemIndex].getID();
+
+        if(item.getID() === curID){
+          completedItemIndex++;
+        } else {
+          newList.push(item);
+        }
+      }
+    });
+
+    this._list = newList;
+  }
+
+  isItemInList(name: string){
+    let isInList = false;
+
+    this._list.forEach((item) => {
+      if(item.Name.trim().toUpperCase() === name.trim().toUpperCase()){
+        isInList = true;
+        return;
+      }
+    });
+
+    return isInList;
   }
 
   getTodoItems() {

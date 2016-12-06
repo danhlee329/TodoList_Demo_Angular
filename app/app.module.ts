@@ -2,23 +2,20 @@ import { BrowserModule }       from '@angular/platform-browser';
 import { FormsModule }         from '@angular/forms';
 import { NgModule }            from '@angular/core';
 import { AppComponent }        from './app.component';
-import { TodoListComponent } from './todo/todo-list.component';
-import { TodoService }      from './todo/todo.service';
+import { TodoModule }        from './todo/todo.module';
 //import { BackendService }      from './backend.service';
 import { Logger }              from './logger.service';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    TodoModule
   ],
   declarations: [
-    AppComponent,
-    TodoListComponent
+    AppComponent
   ],
    providers: [
-    //BackendService,
-    TodoService,
     Logger
   ],
   bootstrap: [ AppComponent ]
