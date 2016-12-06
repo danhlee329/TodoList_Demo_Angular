@@ -1,0 +1,20 @@
+<h2>{{listName}}</h2>
+
+<input placeholder="What needs to be done?" [(ngModel)]="newItem" autofocus />
+<button (click)="addTodoItemToList()">Add Item</button>
+<ul>
+  <li *ngFor="let item of items">
+    <input *ngIf="showItem(item.IsComplete)" type="checkbox" [(ngModel)]="item.IsComplete" />{{item.Name}}
+    <br />
+    Added on {{item.CreatedDate}}
+  </li>
+</ul>
+<footer *ngIf="items.length > 0" >
+  <span><span>{{visibleItemCount()}}</span> of <span>{{items.length}}</span> items left</span>
+
+  <button (click)="viewAll()">All</button>
+  <button (click)="viewActive()">Active</button>
+  <button (click)="viewCompleted()">Completed</button>
+  
+  <button *ngIf="getCompletedItems().length" (click)="clearCompleted()">Clear Completed</button>
+</footer>
