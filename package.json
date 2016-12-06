@@ -2,6 +2,7 @@
   "name": "angular-quickstart",
   "version": "1.0.0",
   "scripts": {
+    "prepublish" : "gulp sass",
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
     "tsc": "tsc",
