@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 
 import { TodoItem } from './todo-list-component/todoItem';
-//import { BackendService } from './shared/service/backend.service';
+import { Headers, Http } from '@angular/http';
 import { Logger } from '../shared/service/logger.service';
+
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TodoService {
   private _list: TodoItem[] = [];
+
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private heroesUrl = 'api/todolist';  // URL to web api
+
+  // TODO: make api calls below
 
   constructor(
     //private backend: BackendService,
