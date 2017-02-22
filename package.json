@@ -2,7 +2,7 @@
   "name": "angular-quickstart",
   "version": "1.0.0",
   "scripts": {
-    "prepublish" : "gulp sass",
+    "prepublish" : "gulp setup",
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
     "tsc": "tsc",
@@ -43,6 +43,7 @@
     "gulp-sass": "2.3.2",
     "gulp-typescript": "^2.13.6",
     "gulp-uglify": "1.2.0",
-    "rimraf": "2.2.8"
+    "rimraf": "2.2.8",
+    "node-font-awesome": "^1.0.0"
   }
 }

@@ -9,8 +9,8 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
-    sass = require("gulp-sass");//,
-    //project = require("./project.json");
+    sass = require("gulp-sass"),
+    fontAwesome = require("node-font-awesome");
 
 var paths = {
     webroot: "./"
@@ -22,15 +22,36 @@ paths.scss = paths.webroot + "css/**/*.scss";
 paths.css = paths.webroot + "css/**/*.css";
 paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
-paths.concatCssDest = paths.webroot + "css/site.min.css";
 
-gulp.task("sass", function () {
-    //return gulp.src(paths.webroot + 'css/Bundled.scss')
-    return gulp.src(paths.scss)
-      .pipe(sass())
-      .pipe(gulp.dest(paths.webroot + 'css'));
+paths.concatCssDest = paths.webroot + "css/final.css";
+paths.fontsDir = paths.webroot + "fonts/";
+
+// Main task to be called
+gulp.task("setup",
+          [
+            "fonts",
+            "sass"
+          ]);
+
+// Sets up fonts to use in app (using node-font-awesome)
+gulp.task('fonts', function() {
+  gulp.src(fontAwesome.fonts)
+      .pipe(gulp.dest(paths.fontsDir));
 });
 
+// Compiles all sass files and concatentates them into a single css
+gulp.task("sass", function () {
+    return gulp.src([
+            paths.scss,
+            fontAwesome.scssPath + "/**/*.scss"
+        ])
+      .pipe(sass())
+      .pipe(concat(paths.concatCssDest))
+      .pipe(gulp.dest('.'));
+});
+
+// TODO: refine tasks below and implement in the future
+/* Clean tasks */
 gulp.task("clean:js", function (cb) {
     rimraf(paths.concatJsDest, cb);
 });
@@ -41,6 +62,7 @@ gulp.task("clean:css", function (cb) {
 
 gulp.task("clean", ["clean:js", "clean:css"]);
 
+/* Minify tasks */
 gulp.task("min:js", function () {
     return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
         .pipe(concat(paths.concatJsDest))
@@ -56,5 +78,3 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
-
-
