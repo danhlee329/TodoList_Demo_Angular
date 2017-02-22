@@ -1,0 +1,32 @@
+<h2>{{listName}}</h2>
+
+<input placeholder="What needs to be done?" [(ngModel)]="newItem" autofocus />
+<button (click)="addTodoItemToList()">Add Item</button>
+
+<div style="max-height: 500px;overflow:auto;">
+  <div *ngFor="let item of items">
+    <div *ngIf="showItem(item.IsComplete)">
+      <p>  
+        <!--<i [class]="item.IsComplete ? fa fa-check-square : fa fa-square-o" aria-hidden="true"></i>-->
+        <i class="fa {{item.IsComplete ? 'fa fa-check-square' : 'fa-square-o'}}" 
+          style="cursor: pointer;" 
+          aria-hidden="true"
+          (click)="toggleComplete(item)"></i>
+
+        {{item.Name}}
+        </p>
+        <blockquote>{{displayAddedInfo(item)}}</blockquote>
+      
+    </div>
+  </div>
+</div>
+
+<footer *ngIf="items.length > 0" >
+  <span><span>{{items.length - getCompletedItems().length}}</span> of <span>{{items.length}}</span> items left</span>
+
+  <button (click)="viewAll()">All</button>
+  <button (click)="viewActive()">Active</button>
+  <button (click)="viewCompleted()">Completed</button>
+  
+  <button *ngIf="getCompletedItems().length" (click)="clearCompleted()">Clear Completed</button>
+</footer>
