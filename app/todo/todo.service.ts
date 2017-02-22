@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { TodoItem } from './todoItem';
-//import { BackendService } from './backend.service';
-import { Logger } from '../logger.service';
+import { TodoItem } from './todo-list-component/todoItem';
+//import { BackendService } from './shared/service/backend.service';
+import { Logger } from '../shared/service/logger.service';
 
 @Injectable()
 export class TodoService {
@@ -45,7 +45,7 @@ export class TodoService {
     this._list = newList;
   }
 
-  isItemInList(name: string){
+  isItemInList(name: string): boolean {
     let isInList = false;
 
     this._list.forEach((item) => {
